@@ -3,7 +3,7 @@ Google-Sheets-to-Text-File
 ![cover](images/sheet_to_text.png)
 
 ## Aboat
-A python script to download Google Sheets Data as a text file. This script supports downoload of multiple sheets in one spreadsheet
+A python script to download Google Sheets Data as a text file (csv/excel). This script supports downoload of multiple sheets in one spreadsheet
 
 Table of Contents
 -----------------
