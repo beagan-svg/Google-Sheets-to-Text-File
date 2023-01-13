@@ -22,6 +22,7 @@ git clone 'https://github.com/beagan-svg/Google-Sheets-to-Text-File'
 pip install gspread
 pip install pandas
 pip install oauth2client
+pip install openpyxl
 ```
 3. Replace string with ID of the document you want to download. ID can be found on google sheet URL
 4. Run the Script.
