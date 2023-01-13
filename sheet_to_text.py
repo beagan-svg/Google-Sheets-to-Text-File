@@ -1,4 +1,3 @@
-
 import os
 import csv
 import gspread
@@ -7,20 +6,21 @@ from oauth2client.service_account import ServiceAccountCredentials
 
 
 def main():
-    download_sheet("1ptc4gwo89JYLrNGGwxW887MqsLQWJNvhjOB2f-vCY10")
+    download_sheet("1zN7iNrgDse61K8ZLzpo7xY4aqOY6CONnEvIQoDLfDLQ")
 
 
 def download_sheet(id):
     scope = ['https://spreadsheets.google.com/feeds']
-    credentials = ServiceAccountCredentials.from_json_keyfile_name('credentials.json', scope)
+    credentials = ServiceAccountCredentials.from_json_keyfile_name('service_account.json', scope)
 
-    # Sample Google Sheet document: https://docs.google.com/spreadsheets/d/1YoV-0EoBmDGLg96mbCCY5Sw56YpTC_G9GDkNw60TbuQ/
-    # Don't forget to replace this ID with yours!
+    # Sample Google Sheet document: https://docs.google.com/spreadsheets/d/1zN7iNrgDse61K8ZLzpo7xY4aqOY6CONnEvIQoDLfDLQ/
+    # Replace this ID 
     docID = id
 
     client = gspread.authorize(credentials)
     spreadsheet = client.open_by_key(docID)
 
+    # Write to csv file
     csvFileNames = []
     for i, worksheet in enumerate(spreadsheet.worksheets()):
         filename = str(i + 1) + '_' + str(worksheet.title) + '.csv'
@@ -29,6 +29,8 @@ def download_sheet(id):
             writer = csv.writer(f)
             writer.writerows(worksheet.get_all_values())
 
+    # If you want to download in excel format
+    '''
     with pd.ExcelWriter(spreadsheet.title + '.xlsx') as writer:
         for i in range(len(csvFileNames)):
             read_file = pd.read_csv(csvFileNames[i])
@@ -37,7 +39,7 @@ def download_sheet(id):
 
     for i in csvFileNames:
         os.remove(i)
-
+    '''
 
 if __name__ == '__main__':
     main()
