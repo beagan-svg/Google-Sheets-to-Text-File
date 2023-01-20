@@ -25,6 +25,9 @@ def getArgs():
 
 def main():
     args = getArgs()
+    
+    # Sample Google Sheet document: https://docs.google.com/spreadsheets/d/1zN7iNrgDse61K8ZLzpo7xY4aqOY6CONnEvIQoDLfDLQ/
+    # Replace this ID 
     csvFileNames_list = download_sheet("1zN7iNrgDse61K8ZLzpo7xY4aqOY6CONnEvIQoDLfDLQ")
     if args.x:
         # If you want to download in excel format
@@ -42,9 +45,6 @@ def main():
 def download_sheet(id):
     scope = ['https://spreadsheets.google.com/feeds']
     credentials = ServiceAccountCredentials.from_json_keyfile_name('service_account.json', scope)
-
-    # Sample Google Sheet document: https://docs.google.com/spreadsheets/d/1zN7iNrgDse61K8ZLzpo7xY4aqOY6CONnEvIQoDLfDLQ/
-    # Replace this ID 
     docID = id
 
     client = gspread.authorize(credentials)
