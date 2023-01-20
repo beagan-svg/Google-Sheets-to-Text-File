@@ -24,8 +24,8 @@ pip install pandas
 pip install oauth2client
 pip install openpyxl
 ```
-3. Replace string with ID of the document you want to download. ID can be found on google sheet URL
-Ex. 1zN7iNrgDse61K8ZLzpo7xY4aqOY6CONnEvIQoDLfDLQ would be the ID for the URL: https://docs.google.com/spreadsheets/d/1zN7iNrgDse61K8ZLzpo7xY4aqOY6CONnEvIQoDLfDLQ/
+3. Replace string with ID of the document you want to download. ID can be found on google sheet URL.
+3b. Ex: 1zN7iNrgDse61K8ZLzpo7xY4aqOY6CONnEvIQoDLfDLQ would be the ID for the URL: https://docs.google.com/spreadsheets/d/1zN7iNrgDse61K8ZLzpo7xY4aqOY6CONnEvIQoDLfDLQ/
 4. Run the Script.
 ```bash
 python3 sheet_to_text.py
