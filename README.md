@@ -1,4 +1,4 @@
-Google-Sheets-to-Text-File
+Sheets-to-Text-File
 =================================================
 ![cover](images/sheet_to_text.png)
 
