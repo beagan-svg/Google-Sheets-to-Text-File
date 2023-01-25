@@ -25,40 +25,41 @@ def getArgs():
 
 def main():
     args = getArgs()
-    
-    # Sample Google Sheet document: https://docs.google.com/spreadsheets/d/1zN7iNrgDse61K8ZLzpo7xY4aqOY6CONnEvIQoDLfDLQ/
-    # Replace this ID 
-    csvFileNames_list = download_sheet("1zN7iNrgDse61K8ZLzpo7xY4aqOY6CONnEvIQoDLfDLQ")
+    csv_names_list, spreadsheet = download_sheet("1zN7iNrgDse61K8ZLzpo7xY4aqOY6CONnEvIQoDLfDLQ")
     if args.x:
         # If you want to download in excel format
         with pd.ExcelWriter(spreadsheet.title + '.xlsx') as writer:
-            for i in range(len(csvFileNames)):
-                read_file = pd.read_csv(csvFileNames[i])
-                newSheetName = csvFileNames[i].split('_', 1)[-1].replace('.csv', '')
-                read_file.to_excel(writer, sheet_name=newSheetName, index=None)
+            for i in range(len(csv_names_list)):
+                read_file = pd.read_csv(csv_names_list[i])
+                newSheetName = csv_names_list[i].split('_', 1)[-1].replace('.csv', '')
+                read_file.to_excel(writer, sheet_name = newSheetName, index = None)
 
     if args.r:
-        for i in csvFileNames_list:
+        for i in csv_names_list:
             os.remove(i)
 
     
 def download_sheet(id):
     scope = ['https://spreadsheets.google.com/feeds']
+    # 'https://www.googleapis.com/auth/drive'
     credentials = ServiceAccountCredentials.from_json_keyfile_name('service_account.json', scope)
+
+    # Sample Google Sheet document: https://docs.google.com/spreadsheets/d/1zN7iNrgDse61K8ZLzpo7xY4aqOY6CONnEvIQoDLfDLQ/
+    # Replace this ID 
     docID = id
 
     client = gspread.authorize(credentials)
     spreadsheet = client.open_by_key(docID)
 
     # Write to csv file
-    csvFileNames = []
+    csv_names = []
     for i, worksheet in enumerate(spreadsheet.worksheets()):
         filename = str(i + 1) + '_' + str(worksheet.title) + '.csv'
-        csvFileNames.append(filename)
+        csv_names.append(filename)
         with open(filename, 'w', encoding="utf-8") as f:
             writer = csv.writer(f)
             writer.writerows(worksheet.get_all_values())
-    return csvFileNames
+    return csv_names, spreadsheet
 
 
 if __name__ == '__main__':
