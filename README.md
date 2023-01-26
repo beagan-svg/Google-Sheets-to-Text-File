@@ -23,6 +23,7 @@ pip install gspread
 pip install pandas
 pip install oauth2client
 pip install openpyxl
+pip install argparse
 ```
 3. In the sheet_to_text.py file, replace string with ID of the document you want to download. ID can be found on google sheet URL.
 Example:
